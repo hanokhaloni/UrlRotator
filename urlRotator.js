@@ -43,7 +43,7 @@ function showUrl() {
 
 
   contentFrameElement.onload = function () {
-    initProgressBar(timeout, url );
+    initProgressBar(timeout, url);
     setTimeout(function () {
 
       showUrl();
@@ -52,9 +52,7 @@ function showUrl() {
     index++;
   };
 
-  
   contentFrameElement.src = url;
-
   console.log(`loading page ${index} for url ${urls[index]} time ${timeout}`);
 }
 
@@ -66,23 +64,23 @@ function initProgressBar(timeout, url) {
   clearInterval(progressBarIntervalId);
   var progressBarElement = document.getElementById("progressBar");
   var progressBarTextElement = document.getElementById("progressBarText");
-  
-  
+
+
   var width = 0;
-  var updateInterval = 10;
-  var step = (100 / timeout) * updateInterval;
+  var updateIntervalInMs = 10;
+  var step = (100 / timeout) * updateIntervalInMs;
 
   progressBarTextElement.textContent = url;
-  progressBarIntervalId = setInterval(frame, updateInterval);
+  progressBarIntervalId = setInterval(updateProgressBar, updateIntervalInMs);
 
-  function frame() {
+  function updateProgressBar() {
     if (width >= 100) {
       console.log(`timer reset`);
       clearInterval(progressBarIntervalId);
     } else {
       width = width + step;
       progressBarElement.style.width = width + '%';
-      
+
     }
   }
 }
